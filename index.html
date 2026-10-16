@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kuis Kaigo 2 - Interaktif</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Segoe UI', 'Hiragino Sans', 'Meiryo', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -23,10 +19,9 @@
             background: #fff;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 800px;
+            max-width: 850px;
             width: 100%;
             padding: 30px;
-            position: relative;
         }
         h1 {
             text-align: center;
@@ -34,10 +29,7 @@
             font-size: 1.8rem;
             margin-bottom: 20px;
         }
-        /* Start Screen */
-        #startScreen {
-            text-align: center;
-        }
+        #startScreen { text-align: center; }
         #startScreen label {
             display: block;
             text-align: left;
@@ -53,10 +45,7 @@
             font-size: 1rem;
             transition: border 0.3s;
         }
-        #startScreen input:focus {
-            border-color: #764ba2;
-            outline: none;
-        }
+        #startScreen input:focus { border-color: #764ba2; outline: none; }
         .btn {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: #fff;
@@ -70,19 +59,9 @@
             transition: transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
         }
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(118, 75, 162, 0.5);
-        }
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-        /* Quiz Screen */
-        #quizScreen {
-            display: none;
-        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(118, 75, 162, 0.5); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        #quizScreen { display: none; }
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -107,15 +86,8 @@
             font-size: 0.9rem;
             font-weight: 700;
         }
-        .timer.warning {
-            background: #ffcccc;
-            animation: pulse 1s infinite;
-        }
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.6; }
-            100% { opacity: 1; }
-        }
+        .timer.warning { background: #ffcccc; animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
         .progress-bar {
             height: 6px;
             background: #eee;
@@ -130,9 +102,9 @@
             transition: width 0.3s ease;
         }
         .question-text {
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             color: #333;
-            line-height: 1.7;
+            line-height: 1.9;
             margin-bottom: 25px;
             padding: 20px;
             background: #f9f8ff;
@@ -140,11 +112,16 @@
             border-radius: 10px;
             min-height: 100px;
         }
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        .speaker-kaigo { color: #1a5276; font-weight: 600; }
+        .speaker-pasien { color: #1e8449; font-weight: 600; }
+        .dialog-line { display: block; margin-bottom: 6px; }
+        .question-label {
+            color: #c0392b;
+            font-weight: 700;
+            margin-top: 10px;
+            display: block;
         }
+        .options { display: flex; flex-direction: column; gap: 12px; }
         .option {
             display: flex;
             align-items: center;
@@ -157,17 +134,11 @@
             line-height: 1.5;
             background: #fff;
         }
-        .option:hover {
-            border-color: #764ba2;
-            background: #f9f8ff;
-        }
+        .option:hover { border-color: #764ba2; background: #f9f8ff; }
         .option.selected {
             border-color: #764ba2;
             background: #ede8ff;
             box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.15);
-        }
-        .option input {
-            display: none;
         }
         .option .letter {
             display: inline-flex;
@@ -183,40 +154,22 @@
             color: #555;
             transition: all 0.2s;
         }
-        .option.selected .letter {
-            background: #764ba2;
-            color: #fff;
-        }
+        .option.selected .letter { background: #764ba2; color: #fff; }
         .nav-buttons {
             display: flex;
             justify-content: space-between;
             margin-top: 30px;
             gap: 15px;
         }
-        .nav-buttons .btn {
-            flex: 1;
-            margin-top: 0;
-            padding: 14px 20px;
-        }
+        .nav-buttons .btn { flex: 1; margin-top: 0; padding: 14px 20px; }
         .nav-buttons .btn.secondary {
             background: #e0e0e0;
             color: #555;
             box-shadow: none;
         }
-        .nav-buttons .btn.secondary:hover {
-            background: #d0d0d0;
-            box-shadow: none;
-        }
-        /* Result Screen */
-        #resultScreen {
-            display: none;
-            text-align: center;
-        }
-        #resultScreen h2 {
-            color: #4a3f8a;
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
+        .nav-buttons .btn.secondary:hover { background: #d0d0d0; box-shadow: none; }
+        #resultScreen { display: none; text-align: center; }
+        #resultScreen h2 { color: #4a3f8a; font-size: 2rem; margin-bottom: 10px; }
         .score-circle {
             width: 150px;
             height: 150px;
@@ -231,14 +184,8 @@
             font-weight: 700;
             box-shadow: 0 10px 30px rgba(118, 75, 162, 0.4);
         }
-        .result-detail {
-            font-size: 1.2rem;
-            color: #555;
-            margin: 10px 0;
-        }
-        .result-detail strong {
-            color: #4a3f8a;
-        }
+        .result-detail { font-size: 1.2rem; color: #555; margin: 10px 0; }
+        .result-detail strong { color: #4a3f8a; }
         .result-message {
             font-size: 1.1rem;
             color: #666;
@@ -250,8 +197,8 @@
         @media (max-width: 600px) {
             .container { padding: 20px; }
             h1 { font-size: 1.4rem; }
-            .question-text { font-size: 1rem; padding: 15px; }
-            .option { font-size: 0.95rem; padding: 12px 14px; }
+            .question-text { font-size: 0.95rem; padding: 15px; }
+            .option { font-size: 0.9rem; padding: 12px 14px; }
             .nav-buttons { flex-direction: column; }
         }
     </style>
@@ -260,7 +207,6 @@
 <div class="container">
     <h1>📝 介護日本語テスト 2</h1>
 
-    <!-- START SCREEN -->
     <div id="startScreen">
         <label for="nama">Nama Lengkap</label>
         <input type="text" id="nama" placeholder="Masukkan nama Anda" required>
@@ -269,11 +215,10 @@
         <button class="btn" id="startBtn" onclick="startQuiz()">Mulai Kuis</button>
     </div>
 
-    <!-- QUIZ SCREEN -->
     <div id="quizScreen">
         <div class="top-bar">
             <span class="badge" id="questionCounter">Soal 1 / 20</span>
-            <span class="timer" id="timerDisplay">⏱ 15:00</span>
+            <span class="timer" id="timerDisplay">⏱ 30:00</span>
         </div>
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
@@ -286,7 +231,6 @@
         </div>
     </div>
 
-    <!-- RESULT SCREEN -->
     <div id="resultScreen">
         <h2>🎉 Kuis Selesai!</h2>
         <div class="score-circle" id="scoreDisplay">0</div>
@@ -300,226 +244,332 @@
 
 <script>
 // ==================== DATA SOAL ====================
+// Nama orang TIDAK diberi hiragana. Kanji lain diberi hiragana dalam ( ).
 const questionsData = [
     // Soal 1
     {
-        q: "介護職：佐藤さん、看護師が入浴してもいいと言いましたから、きょうはお風呂に入れますよ。体調はいかがですか。\n佐藤さん：昨日は、少し咳が出ました。でも、今日は大丈夫です。先週から、髪を洗っていないので、頭が痒いです。\n介護職：わかりました。今日は、髪をしっかり洗いましょう。じゃ、行きましょう。\n\n(問題) 会話の内容で、正しいものを選んで下さい。",
+        q: `<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>佐藤さん、看護師(かんごし)が入浴(にゅうよく)してもいいと言(い)いましたから、</span>
+<span class="dialog-line">きょうはお風呂(ふろ)に入(はい)れますよ。体調(たいちょう)はいかがですか。</span>
+<span class="dialog-line"><span class="speaker-pasien">佐藤さん：</span>昨日(きのう)は、少(すこ)し咳(せき)が出(で)ました。でも、今日(きょう)は大丈夫(だいじょうぶ)です。</span>
+<span class="dialog-line">先週(せんしゅう)から、髪(かみ)を洗(あら)っていないので、頭(あたま)が痒(かゆ)いです。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>わかりました。今日(きょう)は、髪(かみ)をしっかり洗(あら)いましょう。じゃ、行(い)きましょう。</span>
+<span class="question-label">(問題(もんだい)) 会話(かいわ)の内容(ないよう)で、正(ただ)しいものを選(えら)んで下(くだ)さい。</span>`,
         options: [
-            "佐藤さんは、きょう、体調が悪いです。",
-            "佐藤さんは、きょう、咳が出てまいす。",
-            "佐藤さんは、きのう、髪を洗わなかったです。",
-            "佐藤さんは、きのう、髪を洗いました。"
+            "佐藤さんは、きょう、体調(たいちょう)が悪(わる)いです。",
+            "佐藤さんは、きょう、咳(せき)が出(で)てまいす。",
+            "佐藤さんは、きのう、髪(かみ)を洗(あら)わなかったです。",
+            "佐藤さんは、きのう、髪(かみ)を洗(あら)いました。"
         ],
-        correct: 2 // index 2 = pilihan ke-3
+        correct: 2
     },
     // Soal 2
     {
-        q: "介護職：鈴木さん、体調はいかがですか。\n鈴木さん：まだ、背中がかゆいよ。\n介護職：ちょっと見てもいいですか。昨日より赤いですね。あとで、看護師に見てもらいましょう。きょうも、からだを拭きましょうか。\n鈴木さん：嫌だよ。お風呂に入りたいよ。\n介護職：そうですか。看護師に聞いてみますね。\n\n(問題) 会話の内容で、正しいものを選んで下さい。",
+        q: `<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>鈴木さん、体調(たいちょう)はいかがですか。</span>
+<span class="dialog-line"><span class="speaker-pasien">鈴木さん：</span>まだ、背中(せなか)がかゆいよ。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>ちょっと見(み)てもいいですか。昨日(きのう)より赤(あか)いですね。</span>
+<span class="dialog-line">あとで、看護師(かんごし)に見(み)てもらいましょう。きょうも、からだを拭(ふ)きましょうか。</span>
+<span class="dialog-line"><span class="speaker-pasien">鈴木さん：</span>嫌(いや)だよ。お風呂(ふろ)に入(はい)りたいよ。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>そうですか。看護師(かんごし)に聞(き)いてみますね。</span>
+<span class="question-label">(問題(もんだい)) 会話(かいわ)の内容(ないよう)で、正(ただ)しいものを選(えら)んで下(くだ)さい。</span>`,
         options: [
-            "鈴木さんは、背中が痛いです。",
-            "鈴木さんは、今日、お風呂に入ります。",
-            "鈴木さんは、お風呂に入れないので、からだを拭きます。",
-            "鈴木さんの背中は昨日より今日のほうが赤いです。"
+            "鈴木さんは、背中(せなか)が痛(いた)いです。",
+            "鈴木さんは、今日(きょう)、お風呂(ふろ)に入(はい)ります。",
+            "鈴木さんは、お風呂(ふろ)に入(はい)れないので、からだを拭(ふ)きます。",
+            "鈴木さんの背中(せなか)は昨日(きのう)より今日(きょう)のほうが赤(あか)いです。"
         ],
-        correct: 3 // index 3 = pilihan ke-4
+        correct: 3
     },
     // Soal 3
     {
-        q: "介護職：一人で便座に座れますか？\n佐藤さん：はい、大丈夫です。このボタンは何ですか。\n介護職：呼び出しボタンです。職員を呼ぶときに使います。私は外にいます。排泄が終わったら、＿＿＿＿＿＿＿＿。\n\n(問題) ＿＿＿＿＿＿＿＿。の中に入る言葉を選んで下さい。",
+        q: `<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>一人(ひとり)で便座(べんざ)に座(すわ)れますか？</span>
+<span class="dialog-line"><span class="speaker-pasien">佐藤さん：</span>はい、大丈夫(だいじょうぶ)です。このボタンは何(なん)ですか。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>呼(よ)び出(だ)しボタンです。職員(しょくいん)を呼(よ)ぶときに使(つか)います。</span>
+<span class="dialog-line">私(わたし)は外(そと)にいます。排泄(はいせつ)が終(お)わったら、＿＿＿＿＿＿＿＿。</span>
+<span class="question-label">(問題(もんだい)) ＿＿＿＿＿＿＿＿。の中(なか)に入(はい)る言葉(ことば)を選(えら)んで下(くだ)さい。</span>`,
         options: [
-            "ボタンを押して、ドアを開けて下さい。",
-            "ボタンを押して、ドアを閉めて下さい。",
-            "ボタンを押して、知らせて下さい。",
-            "ボタンを押して、水を出して下さい。"
+            "ボタンを押(お)して、ドアを開(あ)けて下(くだ)さい。",
+            "ボタンを押(お)して、ドアを閉(し)めて下(くだ)さい。",
+            "ボタンを押(お)して、知(し)らせて下(くだ)さい。",
+            "ボタンを押(お)して、水(みず)を出(だ)して下(くだ)さい。"
         ],
-        correct: 2 // index 2 = pilihan ke-3
+        correct: 2
     },
     // Soal 4
     {
-        q: "介護職：鈴木さん、おはようございます。\n鈴木さん：おはようございます。\n介護職：寝巻きを着替えましょうか。\n鈴木さん：はい。\n介護職：今日は、寒いですよ。上着をもう一枚着ますか。\n鈴木さん：そうですね。引き出しに黄色いセーターがありますから、取って下さい。\n介護職：はい、どうぞ。きれいな色ですね。\n鈴木さん：ええ。黄色は私が一番好きな色です。\n\n(問題) 会話の内容で、正しいものを選んで下さい。",
+        q: `<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>鈴木さん、おはようございます。</span>
+<span class="dialog-line"><span class="speaker-pasien">鈴木さん：</span>おはようございます。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>寝巻(ねま)きを着替(きが)えましょうか。</span>
+<span class="dialog-line"><span class="speaker-pasien">鈴木さん：</span>はい。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>今日(きょう)は、寒(さむ)いですよ。上着(うわぎ)をもう一枚(いちまい)着(き)ますか。</span>
+<span class="dialog-line"><span class="speaker-pasien">鈴木さん：</span>そうですね。引(ひ)き出(だ)しに黄色(きいろ)いセーターがありますから、取(と)って下(くだ)さい。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>はい、どうぞ。きれいな色(いろ)ですね。</span>
+<span class="dialog-line"><span class="speaker-pasien">鈴木さん：</span>ええ。黄色(きいろ)は私(わたし)が一番(いちばん)好(す)きな色(いろ)です。</span>
+<span class="question-label">(問題(もんだい)) 会話(かいわ)の内容(ないよう)で、正(ただ)しいものを選(えら)んで下(くだ)さい。</span>`,
         options: [
-            "鈴木さんは、寝巻きに着替えます。",
-            "鈴木さんは、色で黄色が一番好きです。",
-            "鈴木さんは、引き出しからセーターを出します。",
-            "鈴木さんは、寒いのでコートを着ます。"
+            "鈴木さんは、寝巻(ねま)きに着替(きが)えます。",
+            "鈴木さんは、色(いろ)で黄色(きいろ)が一番(いちばん)好(す)きです。",
+            "鈴木さんは、引(ひ)き出(だ)しからセーターを出(だ)します。",
+            "鈴木さんは、寒(さむ)いのでコートを着(き)ます。"
         ],
-        correct: 1 // index 1 = pilihan ke-2
+        correct: 1
     },
     // Soal 5
     {
-        q: "リーダー：今から、洗面の介護をします。\n介護職：わかりました。\nリーダー：顔を拭くときは、温かいタオルを使います。\n介護職：はい。目の周りはどうやって拭きますか。\nリーダー：目頭から目尻に向かって拭きます。\n介護職：最初に目尻を拭きますね。\nリーダー：いいえ、ちがいます。先に目頭から拭きます。\n介護職：すみません。わかりました。\n\n(問題) 会話の内容で、正しいものを選んで下さい。",
+        q: `<span class="dialog-line"><span class="speaker-kaigo">リーダー：</span>今(いま)から、洗面(せんめん)の介護(かいご)をします。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>わかりました。</span>
+<span class="dialog-line"><span class="speaker-kaigo">リーダー：</span>顔(かお)を拭(ふ)くときは、温(あたた)かいタオルを使(つか)います。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>はい。目(め)の周(まわ)りはどうやって拭(ふ)きますか。</span>
+<span class="dialog-line"><span class="speaker-kaigo">リーダー：</span>目頭(めがしら)から目尻(めじり)に向(む)かって拭(ふ)きます。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>最初(さいしょ)に目尻(めじり)を拭(ふ)きますね。</span>
+<span class="dialog-line"><span class="speaker-kaigo">リーダー：</span>いいえ、ちがいます。先(さき)に目頭(めがしら)から拭(ふ)きます。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>すみません。わかりました。</span>
+<span class="question-label">(問題(もんだい)) 会話(かいわ)の内容(ないよう)で、正(ただ)しいものを選(えら)んで下(くだ)さい。</span>`,
         options: [
-            "目頭から目尻まで拭きます。",
-            "目の下を拭きます。",
-            "目尻から目頭まで拭きます。",
-            "冷たいタオルで拭きます。"
+            "目頭(めがしら)から目尻(めじり)まで拭(ふ)きます。",
+            "目(め)の下(した)を拭(ふ)きます。",
+            "目尻(めじり)から目頭(めがしら)まで拭(ふ)きます。",
+            "冷(つめ)たいタオルで拭(ふ)きます。"
         ],
-        correct: 0 // index 0 = pilihan ke-1
+        correct: 0
     },
     // Soal 6
     {
-        q: "介護職：お湯の温度はいかがですか。少しぬるいですか。\n佐藤さん：いいえ。ちょうどいいです。とても気持ちがいいです。\n介護職：佐藤さん、そろそろお風呂から出ましょうか。\n佐藤さん：ええ。そうですね。\n介護職：床が滑りやすいから、ゆっくり歩いて下さいね。\n佐藤さん：わかりました。気をつけます。\n\n(問題) 会話の内容で、正しいものを選んで下さい。",
+        q: `<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>お湯(ゆ)の温度(おんど)はいかがですか。少(すこ)しぬるいですか。</span>
+<span class="dialog-line"><span class="speaker-pasien">佐藤さん：</span>いいえ。ちょうどいいです。とても気持(きも)ちがいいです。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>佐藤さん、そろそろお風呂(ふろ)から出(で)ましょうか。</span>
+<span class="dialog-line"><span class="speaker-pasien">佐藤さん：</span>ええ。そうですね。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>床(ゆか)が滑(すべ)りやすいから、ゆっくり歩(ある)いて下(くだ)さいね。</span>
+<span class="dialog-line"><span class="speaker-pasien">佐藤さん：</span>わかりました。気(き)をつけます。</span>
+<span class="question-label">(問題(もんだい)) 会話(かいわ)の内容(ないよう)で、正(ただ)しいものを選(えら)んで下(くだ)さい。</span>`,
         options: [
-            "佐藤さんは、滑らないように気をつけます。",
-            "佐藤さんは、気持ちが悪いです。",
-            "床は滑りにくいです。",
-            "お湯の温度はぬるいです。"
+            "佐藤さんは、滑(すべ)らないように気(き)をつけます。",
+            "佐藤さんは、気持(きも)ちが悪(わる)いです。",
+            "床(ゆか)は滑(すべ)りにくいです。",
+            "お湯(ゆ)の温度(おんど)はぬるいです。"
         ],
-        correct: 0 // index 0 = pilihan ke-1
+        correct: 0
     },
     // Soal 7
     {
-        q: "介護職：鈴木さん、腰の調子はいかがですか、トイレに歩いて行けますか。\n鈴木さん：まだ腰が痛くて、起き上がれないよ。トイレまで歩けないよ。\n介護職：そうですか。じゃ、尿器を使いますか。\n鈴木さん：そうだね。\n介護職：わかりました。今、持って来ます。\n\n(問題) 会話の内容で、正しいものを選んで下さい。",
+        q: `<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>鈴木さん、腰(こし)の調子(ちょうし)はいかがですか、トイレに歩(ある)いて行(い)けますか。</span>
+<span class="dialog-line"><span class="speaker-pasien">鈴木さん：</span>まだ腰(こし)が痛(いた)くて、起(お)き上(あ)がれないよ。トイレまで歩(ある)けないよ。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>そうですか。じゃ、尿器(にょうき)を使(つか)いますか。</span>
+<span class="dialog-line"><span class="speaker-pasien">鈴木さん：</span>そうだね。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>わかりました。今(いま)、持(も)って来(き)ます。</span>
+<span class="question-label">(問題(もんだい)) 会話(かいわ)の内容(ないよう)で、正(ただ)しいものを選(えら)んで下(くだ)さい。</span>`,
         options: [
-            "鈴木さんは、起き上がることが出来ます。",
-            "鈴木さんは、尿器で排泄をします。",
-            "鈴木さんは、トイレで排泄をします。",
-            "鈴木さんは、歩いてトイレに行きます。"
+            "鈴木さんは、起(お)き上(あ)がることが出来(でき)ます。",
+            "鈴木さんは、尿器(にょうき)で排泄(はいせつ)をします。",
+            "鈴木さんは、トイレで排泄(はいせつ)をします。",
+            "鈴木さんは、歩(ある)いてトイレに行(い)きます。"
         ],
-        correct: 1 // index 1 = pilihan ke-2
+        correct: 1
     },
     // Soal 8
     {
-        q: "佐藤さん：今日はお天気がいいから、散歩に行きたいわ。\n介護職：公園の花がきれいですから、昼ご飯を食べたら、いっしょに行きましょう。\n佐藤さん：いいですね。\n介護職：シルバーカーを使いますか。\n佐藤さん：はい。疲れたら、座れますから。\n介護職：じゃ、玄関に出しておきます。\n佐藤さん：お願いします。\n\n(問題) 会話の内容で、正しいものを選んで下さい。",
+        q: `<span class="dialog-line"><span class="speaker-pasien">佐藤さん：</span>今日(きょう)はお天気(てんき)がいいから、散歩(さんぽ)に行(い)きたいわ。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>公園(こうえん)の花(はな)がきれいですから、昼(ひる)ご飯(はん)を食(た)べたら、いっしょに行(い)きましょう。</span>
+<span class="dialog-line"><span class="speaker-pasien">佐藤さん：</span>いいですね。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>シルバーカーを使(つか)いますか。</span>
+<span class="dialog-line"><span class="speaker-pasien">佐藤さん：</span>はい。疲(つか)れたら、座(すわ)れますから。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>じゃ、玄関(げんかん)に出(だ)しておきます。</span>
+<span class="dialog-line"><span class="speaker-pasien">佐藤さん：</span>お願(ねが)いします。</span>
+<span class="question-label">(問題(もんだい)) 会話(かいわ)の内容(ないよう)で、正(ただ)しいものを選(えら)んで下(くだ)さい。</span>`,
         options: [
-            "佐藤さんは、昼ご飯の前に、散歩に行きます。",
-            "佐藤さんは、一人で公園に行きます。",
-            "佐藤さんは、シルバーカーを使って公園へ行きます。",
-            "佐藤さんは、シルバーカーを玄関に出しておきます。"
+            "佐藤さんは、昼(ひる)ご飯(はん)の前(まえ)に、散歩(さんぽ)に行(い)きます。",
+            "佐藤さんは、一人(ひとり)で公園(こうえん)に行(い)きます。",
+            "佐藤さんは、シルバーカーを使(つか)って公園(こうえん)へ行(い)きます。",
+            "佐藤さんは、シルバーカーを玄関(げんかん)に出(だ)しておきます。"
         ],
-        correct: 2 // index 2 = pilihan ke-3
+        correct: 2
     },
     // Soal 9
     {
-        q: "鈴木さん：今日は寒いから。セーターを着るよ。\n介護職：わかりました。どセーターを着ますか。\n鈴木さん：その黒いセーターがいいね。\n介護職：昨日、奥さんが持って来たセーターですね。\n鈴木さん：うん、誕生日に娘がくれたんだよ。\n介護職：そうですか。いいですね。\n\n(問題) 会話の内容で、正しいものを選んで下さい。",
+        q: `<span class="dialog-line"><span class="speaker-pasien">鈴木さん：</span>今日(きょう)は寒(さむ)いから。セーターを着(き)るよ。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>わかりました。どセーターを着(き)ますか。</span>
+<span class="dialog-line"><span class="speaker-pasien">鈴木さん：</span>その黒(くろ)いセーターがいいね。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>昨日(きのう)、奥(おく)さんが持(も)って来(き)たセーターですね。</span>
+<span class="dialog-line"><span class="speaker-pasien">鈴木さん：</span>うん、誕生日(たんじょうび)に娘(むすめ)がくれたんだよ。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>そうですか。いいですね。</span>
+<span class="question-label">(問題(もんだい)) 会話(かいわ)の内容(ないよう)で、正(ただ)しいものを選(えら)んで下(くだ)さい。</span>`,
         options: [
-            "鈴木さんは、明日黒いセーターを着ます。",
-            "介護職は、鈴木さんが今日着るセーターを選びました。",
-            "鈴木さんは、娘さんにセーターをもらいました。",
-            "娘さんは、昨日、セーターを持って来ました。"
+            "鈴木さんは、明日(あした)黒(くろ)いセーターを着(き)ます。",
+            "介護職(かいごしょく)は、鈴木さんが今日(きょう)着(き)るセーターを選(えら)びました。",
+            "鈴木さんは、娘(むすめ)さんにセーターをもらいました。",
+            "娘(むすめ)さんは、昨日(きのう)、セーターを持(も)って来(き)ました。"
         ],
-        correct: 2 // index 2 = pilihan ke-3
+        correct: 2
     },
     // Soal 10
     {
-        q: "介護職：鈴木さん、おかえりなさい。\n鈴木さん：うん。外は涼しくて気持ちが良かったよ。\n介護職：それは良かったですね。これから昼ご飯ですからトイレにいきませんか。\n鈴木さん：今はまだ行きたくないから、先に食堂へ行くよ。\n介護職：そうですか。でも、食事の前にトイレに行った方が安心ですよ。\n鈴木さん：そうか。じゃ、行っておこう。\n介護職：はい。わかりました。\n\n(問題) 会話の内容で、正しいものを選んで下さい。",
+        q: `<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>鈴木さん、おかえりなさい。</span>
+<span class="dialog-line"><span class="speaker-pasien">鈴木さん：</span>うん。外(そと)は涼(すず)しくて気持(きも)ちが良(よ)かったよ。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>それは良(よ)かったですね。これから昼(ひる)ご飯(はん)ですからトイレにいきませんか。</span>
+<span class="dialog-line"><span class="speaker-pasien">鈴木さん：</span>今(いま)はまだ行(い)きたくないから、先(さき)に食堂(しょくどう)へ行(い)くよ。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>そうですか。でも、食事(しょくじ)の前(まえ)にトイレに行(い)った方(ほう)が安心(あんしん)ですよ。</span>
+<span class="dialog-line"><span class="speaker-pasien">鈴木さん：</span>そうか。じゃ、行(い)っておこう。</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>はい。わかりました。</span>
+<span class="question-label">(問題(もんだい)) 会話(かいわ)の内容(ないよう)で、正(ただ)しいものを選(えら)んで下(くだ)さい。</span>`,
         options: [
-            "鈴木さんは、これから散歩に行きます。",
-            "鈴木さんは、これから、トイレに行きます。",
-            "鈴木さんは、これから食堂へ行きます。",
-            "鈴木さんは、これからご飯を食べに行きます。"
+            "鈴木さんは、これから散歩(さんぽ)に行(い)きます。",
+            "鈴木さんは、これから、トイレに行(い)きます。",
+            "鈴木さんは、これから食堂(しょくどう)へ行(い)きます。",
+            "鈴木さんは、これからご飯(はん)を食(た)べに行(い)きます。"
         ],
-        correct: 1 // index 1 = pilihan ke-2
+        correct: 1
     },
     // Soal 11
     {
-        q: "田中さん：「今日は暖かいから、外に散歩に行きたいな。」\n介護職：「いいですね。帽子を持っていきますか？」\n田中さん：「うん、帽子がぶった方がいいね。」\n介護職：「この青い帽子でいいですか？」\n田中さん：「それがいいよ。」\n\n(問題) 会話の内容で正しいものを選んでください。",
+        q: `<span class="dialog-line"><span class="speaker-pasien">田中さん：</span>「今日(きょう)は暖(あたた)かいから、外(そと)に散歩(さんぽ)に行(い)きたいな。」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「いいですね。帽子(ぼうし)を持(も)っていきますか？」</span>
+<span class="dialog-line"><span class="speaker-pasien">田中さん：</span>「うん、帽子(ぼうし)がぶった方(ほう)がいいね。」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「この青(あお)い帽子(ぼうし)でいいですか？」</span>
+<span class="dialog-line"><span class="speaker-pasien">田中さん：</span>「それがいいよ。」</span>
+<span class="question-label">(問題(もんだい)) 会話(かいわ)の内容(ないよう)で正(ただ)しいものを選(えら)んでください。</span>`,
         options: [
-            "介護職は、田中さんに帽子を持っていくか聞きました。",
-            "田中さんは、今日は外に散歩に行きたくないです。",
-            "田中さんは、帽子はいらないと言っています。",
-            "介護職は、赤い帽子を持って行きました。"
+            "介護職(かいごしょく)は、田中さんに帽子(ぼうし)を持(も)っていくか聞(き)きました。",
+            "田中さんは、今日(きょう)は外(そと)に散歩(さんぽ)に行(い)きたくないです。",
+            "田中さんは、帽子(ぼうし)はいらないと言(い)っています。",
+            "介護職(かいごしょく)は、赤(あか)い帽子(ぼうし)を持(も)って行(い)きました。"
         ],
-        correct: 0 // index 0 = pilihan ke-1
+        correct: 0
     },
     // Soal 12
     {
-        q: "山本さん：「お腹が空いたから、何か食べたいな。」\n介護職：「食事の時間はまだですが、何か用意しましょうか？」\n山本さん：「そうだね、お菓子がいいな。」\n介護職：「クッキーはいかがですか？」\n山本さん：「それがいいね。」\n\n(問題) 会話の内容で正しいものを選んでください。",
+        q: `<span class="dialog-line"><span class="speaker-pasien">山本さん：</span>「お腹(なか)が空(す)いたから、何(なに)か食(た)べたいな。」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「食事(しょくじ)の時間(じかん)はまだですが、何(なに)か用意(ようい)しましょうか？」</span>
+<span class="dialog-line"><span class="speaker-pasien">山本さん：</span>「そうだね、お菓子(かし)がいいな。」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「クッキーはいかがですか？」</span>
+<span class="dialog-line"><span class="speaker-pasien">山本さん：</span>「それがいいね。」</span>
+<span class="question-label">(問題(もんだい)) 会話(かいわ)の内容(ないよう)で正(ただ)しいものを選(えら)んでください。</span>`,
         options: [
-            "山本さんは、お腹が空いていません。",
-            "山本さんは、おやつが食べたいと言っています。",
-            "山本さんは、食事をしました。",
-            "山本さんは、ケーキを食べました。"
+            "山本さんは、お腹(なか)が空(す)いていません。",
+            "山本さんは、おやつが食(た)べたいと言(い)っています。",
+            "山本さんは、食事(しょくじ)をしました。",
+            "山本さんは、ケーキを食(た)べました。"
         ],
-        correct: 1 // index 1 = pilihan ke-2
+        correct: 1
     },
     // Soal 13
     {
-        q: "長谷川さん：「今日の夕食は何ですか？」\n介護職：「今日はカレーライスですよ。」\n長谷川さん：「それは楽しみだな。」\n介護職：「喜んでいただけて嬉しいです。」\n\n(問題) 会話の内容で正しいものを選んでください。",
+        q: `<span class="dialog-line"><span class="speaker-pasien">長谷川さん：</span>「今日(きょう)の夕食(ゆうしょく)は何(なん)ですか？」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「今日(きょう)はカレーライスですよ。」</span>
+<span class="dialog-line"><span class="speaker-pasien">長谷川さん：</span>「それは楽(たの)しみだな。」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「喜(よろこ)んでいただけて嬉(うれ)しいです。」</span>
+<span class="question-label">(問題(もんだい)) 会話(かいわ)の内容(ないよう)で正(ただ)しいものを選(えら)んでください。</span>`,
         options: [
-            "長谷川さんは、今日の夕食がわかりません。",
-            "長谷川さんは、カレーライスが嫌いです。",
-            "介護職は、昨日の夕食がカレーライスだと言いました。",
-            "介護職は、今日の夕食を教えました。"
+            "長谷川さんは、今日(きょう)の夕食(ゆうしょく)がわかりません。",
+            "長谷川さんは、カレーライスが嫌(きら)いです。",
+            "介護職(かいごしょく)は、昨日(きのう)の夕食(ゆうしょく)がカレーライスだと言(い)いました。",
+            "介護職(かいごしょく)は、今日(きょう)の夕食(ゆうしょく)を教(おし)えました。"
         ],
-        correct: 3 // index 3 = pilihan ke-4
+        correct: 3
     },
     // Soal 14
     {
-        q: "鈴木さん：「今日は誕生日だから、おしゃれな服を着たいな。」\n介護職：「どのおしゃれな服がいいですか？」\n鈴木さん：「あの赤いドレスがいいね。」\n介護職：「それはお孫さんがプレゼントしてくれたものですね。」\n鈴木さん：「そうそう、特別な日に着るためのものなんだ。」\n\n(問題) 会話の内容で正しいものを選んでください。",
+        q: `<span class="dialog-line"><span class="speaker-pasien">鈴木さん：</span>「今日(きょう)は誕生日(たんじょうび)だから、おしゃれな服(ふく)を着(き)たいな。」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「どのおしゃれな服(ふく)がいいですか？」</span>
+<span class="dialog-line"><span class="speaker-pasien">鈴木さん：</span>「あの赤(あか)いドレスがいいね。」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「それはお孫(まご)さんがプレゼントしてくれたものですね。」</span>
+<span class="dialog-line"><span class="speaker-pasien">鈴木さん：</span>「そうそう、特別(とくべつ)な日(ひ)に着(き)るためのものなんだ。」</span>
+<span class="question-label">(問題(もんだい)) 会話(かいわ)の内容(ないよう)で正(ただ)しいものを選(えら)んでください。</span>`,
         options: [
-            "鈴木さんは、お孫さんに赤いドレスをあげました。",
-            "鈴木さんは、お孫さんに赤いドレスをもらいました。",
-            "介護職は、鈴木さんに新しい服を買ってきました。",
-            "鈴木さんは、おしゃれな服を着るのが嫌いです。"
+            "鈴木さんは、お孫(まご)さんに赤(あか)いドレスをあげました。",
+            "鈴木さんは、お孫(まご)さんに赤(あか)いドレスをもらいました。",
+            "介護職(かいごしょく)は、鈴木さんに新(あたら)しい服(ふく)を買(か)ってきました。",
+            "鈴木さんは、おしゃれな服(ふく)を着(き)るのが嫌(きら)いです。"
         ],
-        correct: 1 // index 1 = pilihan ke-2
+        correct: 1
     },
     // Soal 15
     {
-        q: "木村さん：「今日は外でお昼ご飯を食べたいな。」\n介護職：「いいですね。どこで食べたいですか？」\n木村さん：「庭のベンチで食べたいな。」\n介護職：「わかりました。準備しますね。」\n\n(問題) 会話の内容で正しいものを選んでください。",
+        q: `<span class="dialog-line"><span class="speaker-pasien">木村さん：</span>「今日(きょう)は外(そと)でお昼(ひる)ご飯(はん)を食(た)べたいな。」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「いいですね。どこで食(た)べたいですか？」</span>
+<span class="dialog-line"><span class="speaker-pasien">木村さん：</span>「庭(にわ)のベンチで食(た)べたいな。」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「わかりました。準備(じゅんび)しますね。」</span>
+<span class="question-label">(問題(もんだい)) 会話(かいわ)の内容(ないよう)で正(ただ)しいものを選(えら)んでください。</span>`,
         options: [
-            "介護職は、庭のベンチでお昼ご飯を食べたいと言っています。",
-            "介護職は、木村さんに外で食べるのは良くないと言いました。",
-            "木村さんは、庭のベンチでお昼ご飯を食べたいと言っています。",
-            "木村さんは、食堂で食べたいと言っています。"
+            "介護職(かいごしょく)は、庭(にわ)のベンチでお昼(ひる)ご飯(はん)を食(た)べたいと言(い)っています。",
+            "介護職(かいごしょく)は、木村さんに外(そと)で食(た)べるのは良(よ)くないと言(い)いました。",
+            "木村さんは、庭(にわ)のベンチでお昼(ひる)ご飯(はん)を食(た)べたいと言(い)っています。",
+            "木村さんは、食堂(しょくどう)で食(た)べたいと言(い)っています。"
         ],
-        correct: 2 // index 2 = pilihan ke-3
+        correct: 2
     },
     // Soal 16
     {
-        q: "佐藤さん：「テレビが見たいけど、リモコンが見つからないよ。」\n介護職：「どの番組を見たいですか？」\n佐藤さん：「ニュースが見たいです。」\n介護職：「リモコンを探してきますね。」\n\n(問題) 会話の内容で正しいものを選んでください。",
+        q: `<span class="dialog-line"><span class="speaker-pasien">佐藤さん：</span>「テレビが見(み)たいけど、リモコンが見(み)つからないよ。」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「どの番組(ばんぐみ)を見(み)たいですか？」</span>
+<span class="dialog-line"><span class="speaker-pasien">佐藤さん：</span>「ニュースが見(み)たいです。」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「リモコンを探(さが)してきますね。」</span>
+<span class="question-label">(問題(もんだい)) 会話(かいわ)の内容(ないよう)で正(ただ)しいものを選(えら)んでください。</span>`,
         options: [
-            "佐藤さんは、ニュースしか見たくありません。",
-            "佐藤さんは、ニュースが見たくありません。",
-            "佐藤さんは、リモコンを探してきます。",
-            "介護職は、佐藤さんにニュースを見ないように言いました。"
+            "佐藤さんは、ニュースしか見(み)たくありません。",
+            "佐藤さんは、ニュースが見(み)たくありません。",
+            "佐藤さんは、リモコンを探(さが)してきます。",
+            "介護職(かいごしょく)は、佐藤さんにニュースを見(み)ないように言(い)いました。"
         ],
-        correct: 0 // index 0 = pilihan ke-1
+        correct: 0
     },
     // Soal 17
     {
-        q: "松本さん：「今日は暑いから、食欲がないな。」\n介護職：「食べたい物はありませんか？」\n松本さん：「ちらし寿司なら少し食べれそうですね。」\n介護職：「それでは、今日の夕食はちらし寿司を作りますね。」\n\n(問題) 会話の内容で正しいものを選んでください。",
+        q: `<span class="dialog-line"><span class="speaker-pasien">松本さん：</span>「今日(きょう)は暑(あつ)いから、食欲(しょくよく)がないな。」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「食(た)べたい物(もの)はありませんか？」</span>
+<span class="dialog-line"><span class="speaker-pasien">松本さん：</span>「ちらし寿司(ずし)なら少(すこ)し食(た)べれそうですね。」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「それでは、今日(きょう)の夕食(ゆうしょく)はちらし寿司(ずし)を作(つく)りますね。」</span>
+<span class="question-label">(問題(もんだい)) 会話(かいわ)の内容(ないよう)で正(ただ)しいものを選(えら)んでください。</span>`,
         options: [
-            "松本さんは、お腹が空いたと言っています。",
-            "介護職は、昼食を作りに来ています。",
-            "介護職は、食べたい物が有るか聞きました。",
-            "松本さんは、ラーメンを食べたいと言っています。"
+            "松本さんは、お腹(なか)が空(す)いたと言(い)っています。",
+            "介護職(かいごしょく)は、昼食(ちゅうしょく)を作(つく)りに来(き)ています。",
+            "介護職(かいごしょく)は、食(た)べたい物(もの)が有(あ)るか聞(き)きました。",
+            "松本さんは、ラーメンを食(た)べたいと言(い)っています。"
         ],
-        correct: 2 // index 2 = pilihan ke-3
+        correct: 2
     },
     // Soal 18
     {
-        q: "山田さん：「今日は散歩に行きたいな。」\n介護職：「どこに行きたいですか？」\n山田さん：「公園に行きたいです。」\n介護職：「公園まで行きましょうか。準備しますね。」\n\n(問題) 会話の内容で正しいものを選んでください。",
+        q: `<span class="dialog-line"><span class="speaker-pasien">山田さん：</span>「今日(きょう)は散歩(さんぽ)に行(い)きたいな。」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「どこに行(い)きたいですか？」</span>
+<span class="dialog-line"><span class="speaker-pasien">山田さん：</span>「公園(こうえん)に行(い)きたいです。」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「公園(こうえん)まで行(い)きましょうか。準備(じゅんび)しますね。」</span>
+<span class="question-label">(問題(もんだい)) 会話(かいわ)の内容(ないよう)で正(ただ)しいものを選(えら)んでください。</span>`,
         options: [
-            "山田さんは、散歩に行きたくないと言っています。",
-            "介護職は、山田さんに公園には行けないと言いました。",
-            "山田さんは、外に行きたいと言っています。",
-            "介護職は、公園に行きたいと言っています。"
+            "山田さんは、散歩(さんぽ)に行(い)きたくないと言(い)っています。",
+            "介護職(かいごしょく)は、山田さんに公園(こうえん)には行(い)けないと言(い)いました。",
+            "山田さんは、外(そと)に行(い)きたいと言(い)っています。",
+            "介護職(かいごしょく)は、公園(こうえん)に行(い)きたいと言(い)っています。"
         ],
-        correct: 2 // index 2 = pilihan ke-3
+        correct: 2
     },
     // Soal 19
     {
-        q: "吉田さん：「今日は友達が来るから、部屋を掃除したいな。」\n介護職：「いつ来る予定ですか？」\n吉田さん：「午後2時に来る予定です。」\n介護職：「わかりました。それまでに掃除を手伝いますね。」\n\n(問題) 会話の内容で正しいものを選んでください。",
+        q: `<span class="dialog-line"><span class="speaker-pasien">吉田さん：</span>「今日(きょう)は友達(ともだち)が来(く)るから、部屋(へや)を掃除(そうじ)したいな。」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「いつ来(く)る予定(よてい)ですか？」</span>
+<span class="dialog-line"><span class="speaker-pasien">吉田さん：</span>「午後(ごご)2時(じ)に来(く)る予定(よてい)です。」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「わかりました。それまでに掃除(そうじ)を手伝(てつだ)いますね。」</span>
+<span class="question-label">(問題(もんだい)) 会話(かいわ)の内容(ないよう)で正(ただ)しいものを選(えら)んでください。</span>`,
         options: [
-            "吉田さんは、今日は誰も来ないと言っています。",
-            "吉田さんは、14時に友達が来ると言っています。",
-            "吉田さんは、2時に友達が来ると言っています。",
-            "吉田さんは、部屋を掃除したくないと言っています。"
+            "吉田さんは、今日(きょう)は誰(だれ)も来(こ)ないと言(い)っています。",
+            "吉田さんは、14時(じ)に友達(ともだち)が来(く)ると言(い)っています。",
+            "吉田さんは、2時(じ)に友達(ともだち)が来(く)ると言(い)っています。",
+            "吉田さんは、部屋(へや)を掃除(そうじ)したくないと言(い)っています。"
         ],
-        correct: 1 // index 1 = pilihan ke-2
+        correct: 1
     },
     // Soal 20
     {
-        q: "川村さん：「今日は何の日だっけ？」\n介護職：「今日は日曜日ですよ。」\n川村さん：「ああ、日曜日か。じゃあゆっくり過ごそうかな。」\n介護職：「いいですね。何かお手伝いしましょうか？」\n\n(問題) 会話の内容で正しいものを選んでください。",
+        q: `<span class="dialog-line"><span class="speaker-pasien">川村さん：</span>「今日(きょう)は何(なん)の日(ひ)だっけ？」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「今日(きょう)は日曜日(にちようび)ですよ。」</span>
+<span class="dialog-line"><span class="speaker-pasien">川村さん：</span>「ああ、日曜日(にちようび)か。じゃあゆっくり過(す)ごそうかな。」</span>
+<span class="dialog-line"><span class="speaker-kaigo">介護職(かいごしょく)：</span>「いいですね。何(なに)かお手伝(てつだ)いしましょうか？」</span>
+<span class="question-label">(問題(もんだい)) 会話(かいわ)の内容(ないよう)で正(ただ)しいものを選(えら)んでください。</span>`,
         options: [
-            "川村さんは、今日は土曜日だと言っています。",
-            "介護職は、今日は月曜日だと言いました。",
-            "介護職は、川村さんに忙しく過ごすように言いました。",
-            "川村さんは、日曜日だとわかりました。"
+            "川村さんは、今日(きょう)は土曜日(どようび)だと言(い)っています。",
+            "介護職(かいごしょく)は、今日(きょう)は月曜日(げつようび)だと言(い)いました。",
+            "介護職(かいごしょく)は、川村さんに忙(いそが)しく過(す)ごすように言(い)いました。",
+            "川村さんは、日曜日(にちようび)だとわかりました。"
         ],
-        correct: 3 // index 3 = pilihan ke-4
+        correct: 3
     }
 ];
 
@@ -530,7 +580,7 @@ let currentIndex = 0;
 let userName = "";
 let userClass = "";
 let timerInterval = null;
-let timeLeft = 15 * 60; // 15 menit dalam detik
+let timeLeft = 30 * 60;
 
 // ==================== FUNGSI ACAK ====================
 function shuffleArray(arr) {
@@ -555,10 +605,8 @@ function startQuiz() {
     userName = namaInput;
     userClass = kelasInput;
 
-    // Acak soal
     currentQuestions = shuffleArray(questionsData);
 
-    // Acak opsi untuk setiap soal & simpan jawaban benar baru
     currentQuestions = currentQuestions.map(q => {
         const correctText = q.options[q.correct];
         const shuffledOptions = shuffleArray(q.options);
@@ -573,16 +621,12 @@ function startQuiz() {
     userAnswers = new Array(currentQuestions.length).fill(null);
     currentIndex = 0;
 
-    // Sembunyikan start screen, tampilkan quiz
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('quizScreen').style.display = 'block';
     document.getElementById('resultScreen').style.display = 'none';
 
-    // Mulai timer
-    timeLeft = 15 * 60;
+    timeLeft = 30 * 60;
     startTimer();
-
-    // Render soal pertama
     renderQuestion();
 }
 
@@ -605,7 +649,7 @@ function updateTimerDisplay() {
     const seconds = timeLeft % 60;
     const display = document.getElementById('timerDisplay');
     display.textContent = `⏱ ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    if (timeLeft <= 150) { // 5 menit terakhir
+    if (timeLeft <= 300) {
         display.classList.add('warning');
     } else {
         display.classList.remove('warning');
@@ -617,17 +661,11 @@ function renderQuestion() {
     const q = currentQuestions[currentIndex];
     const total = currentQuestions.length;
 
-    // Update counter
     document.getElementById('questionCounter').textContent = `Soal ${currentIndex + 1} / ${total}`;
-
-    // Update progress bar
     const progress = ((currentIndex + 1) / total) * 100;
     document.getElementById('progressFill').style.width = progress + '%';
+    document.getElementById('questionText').innerHTML = q.q;
 
-    // Update question text
-    document.getElementById('questionText').innerHTML = q.q.replace(/\n/g, '<br>');
-
-    // Render options
     const optionsContainer = document.getElementById('optionsContainer');
     optionsContainer.innerHTML = '';
     const letters = ['A', 'B', 'C', 'D'];
@@ -646,7 +684,6 @@ function renderQuestion() {
         optionsContainer.appendChild(div);
     });
 
-    // Update tombol prev/next
     document.getElementById('prevBtn').disabled = currentIndex === 0;
     const nextBtn = document.getElementById('nextBtn');
     if (currentIndex === total - 1) {
@@ -659,7 +696,6 @@ function renderQuestion() {
 // ==================== PILIH OPSI ====================
 function selectOption(idx) {
     userAnswers[currentIndex] = idx;
-    // Update tampilan
     const options = document.querySelectorAll('.option');
     options.forEach((opt, i) => {
         if (i === idx) {
@@ -691,7 +727,6 @@ function nextQuestion() {
 function finishQuiz() {
     if (timerInterval) clearInterval(timerInterval);
 
-    // Hitung skor
     let correctCount = 0;
     currentQuestions.forEach((q, idx) => {
         if (userAnswers[idx] === q.correct) {
@@ -702,7 +737,6 @@ function finishQuiz() {
     const total = currentQuestions.length;
     const score = Math.round((correctCount / total) * 100);
 
-    // Tampilkan hasil
     document.getElementById('quizScreen').style.display = 'none';
     document.getElementById('resultScreen').style.display = 'block';
 
